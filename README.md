@@ -1,11 +1,14 @@
 # SIH-Team4-dashboard
 Dashboard solution created with Azure Maps.
 
-<center>
+
 ![alt text](https://drive.google.com/uc?export=download&id=13JJEPYvfcMwykIGGCLI-XfFKo9PZ8AiR)
+<center>
 Heatmap across various states explaining level of disease outbreak - Week 6 represents the predicted level
+</center>
 <br>
 <br>
+<center>
 ![alt text](https://drive.google.com/uc?export=download&id=1kyN4tBkS8p4IBeF4Fv5frClD5Fx28Yf2)
 Optimal resource allocation and supply movement between states
 </center>
