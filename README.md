@@ -8,7 +8,7 @@ Heatmap across various states explaining level of disease outbreak - Week 6 repr
 </center>
 <br>
 <br>
-![alt text](https://drive.google.com/uc?export=download&id=1kyN4tBkS8p4IBeF4Fv5frClD5Fx28Yf2)
+![alt text](https://drive.google.com/uc?export=download&id=1kyN4tBkS8p4IBeF4Fv5frClD5Fx28Yf2) 
 <center>
 Optimal resource allocation and supply movement between states
 </center>
