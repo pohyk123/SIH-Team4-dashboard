@@ -13,7 +13,7 @@ To help India policy makers provide better health services in affected areas, we
 ## How to use
 1. Create an Azure Maps resource via Azure Portal, and copy the Authentication Key (Shared Key Authentication).
 2. In your .env file, replace subscriptionKey with your own key.
-3. Run `npm start` in CLI.
+3. Run `npm i` to install packages and then `npm start` in CLI.
 4. Open your web browser and visit localhost:3000.
 
 ## References
