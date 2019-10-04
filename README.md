@@ -6,7 +6,7 @@ To help India policy makers provide better health services in affected areas, we
 
 ![alt text](https://drive.google.com/uc?export=download&id=13JJEPYvfcMwykIGGCLI-XfFKo9PZ8AiR)
 
-<p align="center"><b><u>Optimal resource allocation and supply movement between states</b></u></p>
+<p align="center"><ins><b>Optimal resource allocation and supply movement between states</b></ins></p>
 
 ![alt text](https://drive.google.com/uc?export=download&id=1kyN4tBkS8p4IBeF4Fv5frClD5Fx28Yf2) 
 
