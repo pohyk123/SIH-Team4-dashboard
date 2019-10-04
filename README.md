@@ -1,6 +1,4 @@
 # SIH-Team4-dashboard
-Dashboard solution created with Azure Maps.
-
 <p align="center">Heatmap across various states explaining level of disease outbreak - Week 6 represents the predicted level</p>
 
 ![alt text](https://drive.google.com/uc?export=download&id=13JJEPYvfcMwykIGGCLI-XfFKo9PZ8AiR)
