@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add arrows to end of paths - Azure Maps Web SDK Samples</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="This sample shows how to add arrow icons along a line on the map. " />
+    <meta name="keywords" content="map, gis, API, SDK, linestring, arrows, path, symbols, linelayer" />
+    <meta name="author" content="Microsoft Azure Maps" />
+
+    <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+    <script type='text/javascript'>
+        var map, datasource;
+
+        //Sample line data.
+        var lineData = [];
+
+        function GetMap() {
+            //Initialize a map instance.
+            map = new atlas.Map('myMap', {
+                center: [78.075639,10.958223],
+                zoom: 6,
+                view: 'Auto',
+
+				//Add your Azure Maps subscription key to the map SDK. Get an Azure Maps key at https://azure.com/maps
+                authOptions: {
+                    authType: 'subscriptionKey',
+                    subscriptionKey: "{{subscriptionKey}}"
+                }
+            });
+
+            createLegendScaleBar();
+
+            //Wait until the map resources are ready.
+            map.events.add('ready', function () {
+                
+                popup = new atlas.Popup({
+                    pixelOffset: [0, -20],
+                    closeButton: false
+                });
+
+                fetch('/sc_network')
+                    .then(response => response.json())
+                    .then(function (fileContent) {
+                        for (var i=0;i<fileContent.length;i++) {
+                            console.log(fileContent[i]['in_lat']);
+                            newLine = new atlas.data.LineString([ [parseFloat(fileContent[i]['in_lat']),parseFloat(fileContent[i]['in_lon'])], [parseFloat(fileContent[i]['out_lat']),parseFloat(fileContent[i]['out_lon'])]]);
+                            lineData.push(newLine);
+                        }
+                        console.log(lineData);
+                    });
+            
+
+                //Create an arrow icon from one of the built-in templates
+                map.imageSprite.createFromTemplate('arrow-icon', 'triangle-arrow-up', 'DarkOrchid', 'DarkOrchid').then(function () {
+
+                    //Create a data source to add your data to.
+                    datasource = new atlas.source.DataSource();
+                    map.sources.add(datasource);
+
+                    markers = [];
+
+                    //Create a HTML marker and add it to the map.
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="pulseIcon1" />',
+                        position: [78.146011,11.664325],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+
+                    marker.properties.Name = "Salem"
+                    marker.properties.Supply = 3300
+                    marker.properties.Demand = 5354
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="pulseIcon3" />',
+                        position: [77.728165,11.342423],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 6100
+                    marker.properties.Demand = 6535
+
+                    marker.properties.Name = "Erode"
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="pulseIcon2" />',
+                        position: [78.075639,10.958223],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 4109
+                    marker.properties.Demand = 6421
+                    marker.properties.Name = "Karur"
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="pulseIcon3" />',
+                        position: [79.894005,13.144443],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 1202
+                    marker.properties.Demand = 1765
+                    marker.properties.Name = "Tiruvallur"
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="normalIcon1" />',
+                        position: [80.237617,13.067439],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 7106
+                    marker.properties.Demand = 5684
+                    marker.properties.Name = "Chennai";
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="normalIcon1" />',
+                        position: [78.121719,9.939093],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 4251
+                    marker.properties.Demand = 2600
+                    marker.properties.Name = "Madurai"
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="normalIcon2" />',
+                        position: [77.475529,10.011296],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 1031
+                    marker.properties.Demand = 651
+                    marker.properties.Name = "Teni"
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="normalIcon2" />',
+                        position: [76.961632,11.004556],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 1241
+                    marker.properties.Demand = 993
+                    marker.properties.Name = "Coimbatore"
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    marker = new atlas.HtmlMarker({
+                        htmlContent: '<img class="normalIcon2" />',
+                        position: [78.133415,8.765346],
+                    });
+
+                    marker.properties = {Name:'',Supply:0,Demand:0}
+                    marker.properties.Supply = 1412
+                    marker.properties.Demand = 1130
+                    marker.properties.Name = "Thoothukudi"
+                    markers.push(marker);
+                    map.events.add('mouseover', marker, markerHovered);
+                    map.events.add('mouseout', marker, hidePopup);  
+
+                    map.markers.add(markers);
+
+                    //Add line data to the data source.
+                    datasource.add(lineData);
+
+                    //Calculate the end points of the lines and add them to the data source.
+                    datasource.add(calculateLineEndPoints(lineData));
+
+                    //Add a layers for rendering data.
+                    map.layers.add([
+                        //Add a line layer for displaying the line.
+                        new atlas.layer.LineLayer(datasource, null, {
+                            strokeColor: 'Brown',
+                            strokeWidth: 3,
+                            strokeDashArray: [2,2,2,2,2,2]
+                        }),
+
+                        //Add a symbol layer for rendering the arrow along the line.
+                        new atlas.layer.SymbolLayer(datasource, null, {
+                            iconOptions: {
+                                image: 'arrow-icon',            //Reference the custom created icon.
+                                allowOverlap: true,             //Allow icons to overlay.
+                                anchor: 'top',                  //Want the top of the image to align with the end of the line.
+                                rotationAlignment: 'map',       //Lock icon rotation to the map.
+                                rotation: ['get', 'heading'],   //Rotate the icon based on the heading property of each data point.
+                                size: 0.7                       //Scale the size of the icon.
+                            },
+                            filter: ['==', ['geometry-type'], 'Point'] //Only render point data in this layer and not the coordinates of lines.
+                        })
+                    ]);
+                });
+
+
+                function markerHovered(e) {
+                    var content;
+                    var marker = e.target;
+                    content = marker.properties.Name;
+                    supply = marker.properties.Supply;
+                    demand = marker.properties.Demand;
+
+                    //Update the content and position of the popup.
+                    popup.setOptions({
+                        content: '<div style="padding:10px;"><b><u>' + content + '</b></u><br>Supply: ' + supply + '<br>Demand: ' + demand + '</div>',
+                        position: marker.getOptions().position
+                    });
+                    //Open the popup.
+                    popup.open(map);
+                }
+                
+                
+                function hidePopup() {
+                    popup.close();
+                }
+
+
+            });
+        }
+
+        function calculateLineEndPoints(lines) {
+            var points = [];
+            for (var i = 0; i < lines.length; i++) {
+                console.log(i);
+                var p = calculateLineEndPoint(lines[i]);
+                if (p) {
+                    points.push(p);
+                }
+            }
+
+            return points;
+        }
+
+        function calculateLineEndPoint(line) {
+            console.log(line);
+            var l = null;
+
+            if (line instanceof atlas.Shape) {
+                l = line.getCoordinates();
+            } else if (line.type === 'Feature') {
+                l = line.geometry.coordinates;
+            } else if (line.type === 'LineString') {
+                l = line.coordinates;
+                console.log(l[l.length - 2]);
+            }
+
+            if (l && l.length >= 2) {
+                //Use the last coordinate of the line for the point of the end. Calculate the heading from the second last coordinate to the last coordinate.
+                return new atlas.data.Feature(new atlas.data.Point(l[l.length - 1]), {
+                    heading: atlas.math.getPixelHeading(l[l.length - 2], l[l.length - 1])
+                });
+            }
+
+            return null;
+        }
+
+        function positionOnCircle(angle) {
+            //Calculate the position on a circle for an angle of animation.
+            return [
+                Math.cos(angle) * radius,
+                Math.sin(angle) * radius
+            ];
+        }
+
+        function animateMarker(timestamp) {
+            //Update the position of the marker for the animation frame.
+            marker.setOptions({
+                position: positionOnCircle(timestamp / 1000)
+            });
+
+            //Request the next frame of the animation.
+            requestAnimationFrame(animateMarker);
+        }
+        function createLegendScaleBar() {
+            var canvas = document.getElementById('legendCanvas');
+            var ctx = canvas.getContext('2d');
+
+            //Create a linear gradient for the legend.
+            var grd = ctx.createLinearGradient(0, 0, 256, 0);
+            grd.addColorStop(0, 'rgb(255,0,0)');      // red
+            grd.addColorStop(0.57, 'rgb(255,0,0)');      // red
+            grd.addColorStop(0.58, 'rgb(0,0,255)');   // blue
+            grd.addColorStop(1, 'rgb(0,0,255)');        // blue
+
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+    </script>
+    <style>
+        .circleImage {
+            width: 40px;
+            height: 40px;
+            border: 2px solid green;
+            background: red;
+            border-radius: 50%;
+        }
+        .pulseIcon1 {
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: red;
+            border: 2px solid white;
+            cursor: pointer;
+            box-shadow: 0 0 0 rgba(0, 204, 255, 0.6);
+            animation: pulse 3s infinite;
+        }
+        .pulseIcon2 {
+            display: block;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: red;
+            border: 2px solid white;
+            cursor: pointer;
+            box-shadow: 0 0 0 rgba(0, 204, 255, 0.6);
+            animation: pulse 3s infinite;
+        }
+        .pulseIcon3 {
+            display: block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: red;
+            border: 2px solid white;
+            cursor: pointer;
+            box-shadow: 0 0 0 rgba(0, 204, 255, 0.6);
+            animation: pulse 3s infinite;
+        }
+
+        .normalIcon1 {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: blue;
+            border: 2px solid white;
+            cursor: pointer;
+            box-shadow: 0 0 0 rgba(0, 204, 255, 0.6);
+        }       
+        .normalIcon2 {
+            display: block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: blue;
+            border: 2px solid white;
+            cursor: pointer;
+            box-shadow: 0 0 0 rgba(0, 204, 255, 0.6);
+        }
+
+            .pulseIcon:hover {
+                animation: none;
+            }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 50px rgba(0, 204, 255, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 204, 255, 0);
+            }
+        }
+        .legend {
+            position: absolute;
+            bottom: 140px;
+            left: 10px;
+            width: 270px;
+            height: 80px;
+            font-family: Arial;
+            font-size: 12px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        #legendCanvas {
+            width: 256px;
+            height: 20px;
+            margin-top:5px;
+        }
+
+        .legend-mid {
+            margin: 0 0 0 135px;
+        }
+
+        .legend-max {
+            float: right;
+        }
+
+        .legend-label {
+            margin-left: 40px;
+    </style>
+</head>
+<body onload="GetMap()">
+    <div id="myMap" style="position:relative;width:100%;min-width:290px;height:600px;"></div>
+
+    <div class="legend">
+            <center>Disease Intensity</center>
+            <canvas id="legendCanvas"></canvas>
+            <span class="legend-min">Resource shortage</span>
+            <span class="legend-max">Healthy excess</span>
+            <br />
+    </div>
+    <fieldset style="width:calc(100% - 30px);min-width:290px;margin-top:10px;">
+        <center><legend>HotSpots & Resouce Allocation</legend></center>
+        
+    </fieldset>
+</body>
+</html>
