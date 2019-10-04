@@ -1,6 +1,6 @@
 # SIH-Team4-dashboard
 ## Problem Statement & Solution
-To help India policy makers provide better health services in affected areas, we proposed a live dashboard which captures a high-level view of not only the country's current epidemiologic situation, but also predicted future outbreaks and optimal allocation of medical resources at a district level. More information about the problem statement & competition [https://www.mic.gov.in/si2019/](here).
+To help India policy makers provide better health services in affected areas, we proposed a live dashboard which captures a high-level view of not only the country's current epidemiologic situation, but also predicted future outbreaks and optimal allocation of medical resources at a district level. More information about the problem statement & competition [here](https://www.mic.gov.in/si2019/).
 
 <p align="center"><b><ins>Heatmap across various states explaining level of disease outbreak - Week 6 represents the predicted level</b></ins></p>
 
